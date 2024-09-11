@@ -59,6 +59,13 @@ variable "machine_type" {
 variable "proxmox_api_password" {
   type      = string
   sensitive = true
+  default = ""
+}
+
+variable "proxmox_api_token" {
+  type      = string
+  sensitive = true
+  default = ""
 }
 
 variable "proxmox_api_user" {
@@ -78,6 +85,7 @@ source "proxmox-iso" "debian" {
   insecure_skip_tls_verify = true
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
+  token                    = var.proxmox_api_token
 
   template_description = "Built from ${basename(var.iso_file)} on ${formatdate("YYYY-MM-DD hh:mm:ss ZZZ", timestamp())}"
   node                 = var.proxmox_node
